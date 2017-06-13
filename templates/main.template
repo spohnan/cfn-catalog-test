@@ -5,7 +5,7 @@ Description: Service Catalog Test
 Metadata:
 
   Version:
-    Value: v0.2-dev
+    Value: VERSION_STRING # Replaced during deployment by Makefile
 
   AWS::CloudFormation::Interface:
     ParameterGroups:
