@@ -25,6 +25,7 @@ setup:
 
 push:
 	@aws s3 sync $(TMPDIR) s3://$(CLOUDFORMATION_BUCKET)/$(TEMPLATE_NAME)/$(DEVELOPMENT_FOLDER)/$(VERSION) --delete --only-show-errors --acl public-read
+	@echo "Pushing to S3 as $(CLOUDFORMATION_BUCKET)/$(TEMPLATE_NAME)/$(DEVELOPMENT_FOLDER)/$(VERSION)"
 
 cleanup:
 	$(shell rm -rf $(TMPDIR))
