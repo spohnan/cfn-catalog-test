@@ -26,9 +26,9 @@ KEY_NAME := $(TEMPLATE_NAME)$(DEV_RELEASE)/$(VERSION)
 # If this is a tagged release then overwrite the "latest" key
 all:
 ifeq ($(DEV_RELEASE),)
-all: setup push-dev push-release cleanup
+all: push-dev push-release cleanup
 else
-all: setup push-dev cleanup
+all: push-dev cleanup
 endif
 .PHONY: all
 
@@ -39,7 +39,7 @@ setup:
 	@find $(TMPDIR) -type f | xargs sed -i 's/BUCKET_NAME_TOKEN.*/$(BUCKET_NAME)/g'
 	@find $(TMPDIR) -type f | xargs sed -i 's/KEY_NAME_TOKEN.*/$(subst /,\/,$(KEY_NAME))/g'
 
-push-dev:
+push-dev: setup
 	@echo "Pushing to S3 as $(BUCKET_NAME)/$(KEY_NAME)"
 	@aws s3 sync $(TMPDIR) s3://$(BUCKET_NAME)/$(KEY_NAME) --delete --only-show-errors --acl public-read
 
@@ -49,3 +49,6 @@ push-release:
 
 cleanup:
 	$(shell rm -rf $(TMPDIR))
+
+validate: push-dev
+	aws cloudformation validate-template --template-url https://s3.amazonaws.com/$(BUCKET_NAME)/$(KEY_NAME)/templates/main.template
