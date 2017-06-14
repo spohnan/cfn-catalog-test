@@ -45,7 +45,7 @@ push-dev:
 
 push-release:
 	@echo "Pushing to S3 as $(BUCKET_NAME)/latest"
-	@aws s3 sync $(TMPDIR) s3://$(BUCKET_NAME)/latest --delete --only-show-errors --acl public-read
+	@aws s3 sync $(TMPDIR) s3://$(BUCKET_NAME)/$(TEMPLATE_NAME)/latest --delete --only-show-errors --acl public-read
 
 cleanup:
 	$(shell rm -rf $(TMPDIR))
