@@ -4,7 +4,7 @@ Description: Service Catalog Test
 Metadata:
 
   Version:
-    Value: VERSION_STRING_TOKEN # Replaced during deployment by Makefile
+    Value: VERSION_STRING_TOKEN
 
 Mappings:
   AWSInfoRegionMap:

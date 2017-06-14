@@ -35,9 +35,9 @@ endif
 setup:
 	$(eval TMPDIR := $(shell mktemp -d tmp.$(TEMPLATE_NAME).XXXXXXXX))
 	@find submodules templates -type f -name "*.template" -exec cp --parents '{}' $(TMPDIR) \; 
-	@find $(TMPDIR) -type f | xargs sed -i 's/VERSION_STRING_TOKEN.*/$(VERSION)/g'
-	@find $(TMPDIR) -type f | xargs sed -i 's/BUCKET_NAME_TOKEN.*/$(BUCKET_NAME)/g'
-	@find $(TMPDIR) -type f | xargs sed -i 's/KEY_NAME_TOKEN.*/$(subst /,\/,$(KEY_NAME))/g'
+	@find $(TMPDIR) -type f | xargs sed -i 's/VERSION_STRING_TOKEN/$(VERSION)/g'
+	@find $(TMPDIR) -type f | xargs sed -i 's/BUCKET_NAME_TOKEN/$(BUCKET_NAME)/g'
+	@find $(TMPDIR) -type f | xargs sed -i 's/KEY_NAME_TOKEN/$(subst /,\/,$(KEY_NAME))/g'
 
 push-dev: setup
 	@echo "Pushing to S3 as $(BUCKET_NAME)/$(KEY_NAME)"
