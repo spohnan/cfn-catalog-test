@@ -1,11 +1,10 @@
 # cfn-catalog-test
 Test deploying and maintaining CloudFormation templates as AWS Service Catalog products
 
-
 ### Token Replacement
 
-The Makefile replaces the version token in the template with the output of [git describe](https://git-scm.com/docs/git-describe#_examples)
-and also fills in the default vales of the parameters to speed testing iteration.
+The Makefile replaces the several token values in the template to track versioning and
+object location within S3
 
 ### Deployment to S3
 
