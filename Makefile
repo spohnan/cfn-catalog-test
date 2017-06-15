@@ -6,11 +6,11 @@
 #
 
 ifeq ($(BUCKET_NAME),)
-	BUCKET_NAME?=cloudformation-041806844807
+BUCKET_NAME?=cloudformation-041806844807
 endif
 
 ifeq ($(TEMPLATE_NAME),)
-	TEMPLATE_NAME?=cfn-catalog-test
+TEMPLATE_NAME?=cfn-catalog-test
 endif
 
 # https://git-scm.com/docs/git-describe#_examples gives an explanation of the string format
@@ -18,7 +18,7 @@ VERSION := $(shell git describe --tags --always --dirty)
 
 # If this version is not a freshly tagged release add a dev prefix (v0.4-1-gd0efeb4 vs v0.4)
 ifeq ($(findstring -, $(VERSION)),-)
-	DEV_RELEASE?=/dev
+DEV_RELEASE?=/dev
 endif
 
 KEY_NAME := $(TEMPLATE_NAME)$(DEV_RELEASE)/$(VERSION)
